@@ -16,6 +16,14 @@ Production-ready Next.js authentication with NextAuth.js. Drop-in auth with cred
 - **API route handlers** — Ready-to-use Next.js route handlers
 - **ORM-agnostic** — Works with Prisma, Drizzle, MongoDB, or any custom backend
 
+## Next.js Compatibility
+
+| Next.js Version | Status |
+|-----------------|--------|
+| v14.x | ✅ Supported |
+| v15.x | ✅ Supported |
+| v16.x | ✅ Supported (requires `next-auth@4.24.14+`) |
+
 ## NextAuth.js Compatibility
 
 This package is built for **NextAuth.js v4** (`next-auth@^4.0.0`).
@@ -28,6 +36,10 @@ This package is built for **NextAuth.js v4** (`next-auth@^4.0.0`).
 We use NextAuth v4 because it is the latest stable release with production-ready
 JWT strategy, credentials provider, and callback system. v5 (Auth.js) is a
 complete rewrite with a different architecture and is still in beta.
+
+> **Next.js 16 users:** Use `next-auth@4.24.14` or later. Earlier v4 releases
+> do not declare Next.js 16 in their peer dependencies and will fail to install
+> without `--legacy-peer-deps`.
 
 ## Why Not Just Use NextAuth Directly?
 
@@ -163,6 +175,121 @@ export async function POST(req: Request) {
   });
 }
 ```
+
+### 4. Set up proxy (Next.js 16+) or middleware (Next.js 14-15)
+
+**Next.js 16+** — create `proxy.ts` (not `middleware.ts`):
+
+```typescript
+// proxy.ts (Next.js 16+)
+import { withAuth } from "next-auth/middleware";
+
+export default withAuth({
+  pages: {
+    signIn: "/auth/login",
+  },
+});
+
+export const config = {
+  matcher: ["/dashboard/:path*", "/settings/:path*"],
+};
+```
+
+**Next.js 14-15** — create `middleware.ts` as usual:
+
+```typescript
+// middleware.ts (Next.js 14-15)
+import { withAuth } from "next-auth/middleware";
+
+export default withAuth({
+  pages: {
+    signIn: "/auth/login",
+  },
+});
+
+export const config = {
+  matcher: ["/dashboard/:path*", "/settings/:path*"],
+};
+```
+
+> **Note:** This step is only needed if you protect routes with NextAuth
+> middleware. The `@gablura/auth-next` package does not create middleware files.
+
+---
+
+## Next.js 16 Migration
+
+If you are upgrading from Next.js 15 to 16, this package works out of the box.
+The only change in your app is the **middleware rename** — Next.js 16 deprecates
+`middleware.ts` and renames it to `proxy.ts`.
+
+### What changes
+
+| Before (Next.js 15) | After (Next.js 16) |
+|----------------------|---------------------|
+| `middleware.ts` | `proxy.ts` |
+| `export function middleware(request)` | `export function proxy(request)` |
+| `skipMiddlewareUrlNormalize` config | `skipProxyUrlNormalize` config |
+| `runtime: 'edge'` in middleware | Removed — proxy runs on Node.js only |
+
+### Steps
+
+1. **Upgrade dependencies**
+
+   ```bash
+   npm install next@latest react@latest react-dom@latest next-auth@latest
+   ```
+
+   Ensure `next-auth` is `4.24.14` or later.
+
+2. **Rename middleware file** (if you use NextAuth middleware)
+
+   ```bash
+   mv middleware.ts proxy.ts
+   ```
+
+   Then rename the exported function:
+
+   ```diff
+   - export function middleware(request: NextRequest) {
+   + export function proxy(request: NextRequest) {
+   ```
+
+   If you use `withAuth` from next-auth:
+
+   ```diff
+   - import withAuth from "next-auth/middleware";
+   + import withAuth from "next-auth/middleware";
+   
+   - export const middleware = withAuth({ ... });
+   + export const proxy = withAuth({ ... });
+   ```
+
+3. **Update config flags** (if applicable)
+
+   ```diff
+   // next.config.ts
+   const nextConfig = {
+   - skipMiddlewareUrlNormalize: true,
+   + skipProxyUrlNormalize: true,
+   };
+   ```
+
+4. **Run the codemod** (optional but recommended)
+
+   ```bash
+   npx @next/codemod@canary upgrade latest
+   ```
+
+   This automates the rename, async request API migration, and config updates.
+
+### What does NOT change
+
+- The `@gablura/auth-next` package itself — no code changes required
+- API route handlers — they use standard Web APIs (`Request`/`Response`)
+- React hooks — `useRouter`, `useSearchParams` from `next/navigation` work the same
+- Components — all use `"use client"`, no Server Component issues
+- Token exchange, refresh, and logout — unaffected
 
 ---
 
