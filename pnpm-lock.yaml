@@ -55,11 +55,11 @@ importers:
         specifier: ^0.44.0
         version: 0.44.0
       next:
-        specifier: ^14.0.0 || ^15.0.0
-        version: 15.5.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^14.0.0 || ^15.0.0 || ^16.0.0
+        version: 15.5.25(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next-auth:
         specifier: ^4.0.0
-        version: 4.24.15(next@15.5.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nodemailer@7.0.13)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 4.24.15(next@15.5.25(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nodemailer@7.0.13)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       nodemailer:
         specifier: ^7.0.0
         version: 7.0.13
@@ -3124,13 +3124,13 @@ snapshots:
     dependencies:
       content-type: 2.1.0
 
-  next-auth@4.24.15(next@15.5.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nodemailer@7.0.13)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  next-auth@4.24.15(next@15.5.25(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(nodemailer@7.0.13)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@babel/runtime': 7.29.7
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
-      next: 15.5.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next: 15.5.25(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       oauth: 0.9.15
       openid-client: 5.7.1
       preact: 10.29.8(preact-render-to-string@5.2.6)
@@ -3141,7 +3141,7 @@ snapshots:
     optionalDependencies:
       nodemailer: 7.0.13
 
-  next@15.5.25(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  next@15.5.25(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 15.5.25
       '@swc/helpers': 0.5.15
@@ -3159,7 +3159,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.5.25
       '@next/swc-win32-arm64-msvc': 15.5.25
       '@next/swc-win32-x64-msvc': 15.5.25
-      sharp: 0.35.4
+      sharp: 0.35.4(@types/node@26.4.1)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
@@ -3413,7 +3413,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  sharp@0.35.4:
+  sharp@0.35.4(@types/node@26.4.1):
     dependencies:
       '@img/colour': 1.1.0
       detect-libc: 2.1.2
@@ -3444,6 +3444,7 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.4
       '@img/sharp-win32-ia32': 0.35.4
       '@img/sharp-win32-x64': 0.35.4
+      '@types/node': 26.4.1
     optional: true
 
   shebang-command@2.0.0:
