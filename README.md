@@ -1,4 +1,4 @@
-# Focura Auth
+# Gablura Auth
 
 Production-ready authentication for full-stack applications. Dual-token RS256 JWT architecture with session binding, token rotation, 2FA, account lockout, and audit logging.
 
