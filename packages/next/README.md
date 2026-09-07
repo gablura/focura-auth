@@ -929,6 +929,7 @@ interface AuthNextConfig {
     register?: string;          // Register page (default: "/authentication/login")
     twoFactor?: string;         // 2FA page (default: "/authentication/2fa")
     verifyEmail?: string;       // After email verified (default: "/authentication/login")
+    verifyEmailPage?: string;   // Verify-email page linked in emails (default: "/authentication/verify-email")
     forgotPassword?: string;    // Forgot password (default: "/authentication/forgot-password")
     resetPassword?: string;     // Reset password (default: "/authentication/reset-password")
     error?: string;             // Error page (default: "/authentication/error")
@@ -950,6 +951,7 @@ After login, the package redirects users to a success page. After password reset
 | 2FA required | `/authentication/2fa` | `callbackRoutes.twoFactor` |
 | Registration success | `/authentication/login` | `callbackRoutes.login` |
 | Email verified | `/authentication/login` | `callbackRoutes.verifyEmail` |
+| Verify-email link (in email) | `/authentication/verify-email` | `callbackRoutes.verifyEmailPage` |
 | Password reset | `/authentication/login` | `callbackRoutes.login` |
 
 ### Custom Routes Example
@@ -961,7 +963,8 @@ const authOptions = await createAuthOptions({
     success: "/dashboard",           // redirect here after login
     login: "/auth/signin",           // custom sign-in page
     twoFactor: "/auth/2fa",          // custom 2FA page
-    verifyEmail: "/auth/verify",     // custom verify page
+    verifyEmail: "/auth/verified",    // redirect here after verification
+    verifyEmailPage: "/auth/verify",  // page the verification email links to
     forgotPassword: "/auth/forgot",  // custom forgot password
     resetPassword: "/auth/reset",    // custom reset password
     error: "/auth/error",            // custom error page

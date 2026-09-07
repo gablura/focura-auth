@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { getRoutes } from "../config.js";
 
 function createTransporter() {
   const { EMAIL_SERVER_HOST, EMAIL_SERVER_PORT, EMAIL_SERVER_USER, EMAIL_SERVER_PASSWORD } = process.env;
@@ -24,7 +25,7 @@ function getTransporter() {
 export async function sendVerificationEmail(email: string, token: string): Promise<void> {
   const baseUrl = process.env.NEXTAUTH_URL;
   if (!baseUrl) throw new Error("Missing NEXTAUTH_URL");
-  const url = `${baseUrl}/authentication/verify-email?token=${token}`;
+  const url = `${baseUrl}${getRoutes().verifyEmailPage}?token=${encodeURIComponent(token)}`;
   const from = process.env.EMAIL_FROM;
   if (!from) throw new Error("Missing EMAIL_FROM");
 
@@ -39,7 +40,7 @@ export async function sendVerificationEmail(email: string, token: string): Promi
 export async function sendPasswordResetEmail(email: string, token: string): Promise<void> {
   const baseUrl = process.env.NEXTAUTH_URL;
   if (!baseUrl) throw new Error("Missing NEXTAUTH_URL");
-  const url = `${baseUrl}/authentication/reset-password?token=${token}`;
+  const url = `${baseUrl}${getRoutes().resetPassword}?token=${encodeURIComponent(token)}`;
   const from = process.env.EMAIL_FROM;
   if (!from) throw new Error("Missing EMAIL_FROM");
 

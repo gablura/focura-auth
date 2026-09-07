@@ -258,6 +258,7 @@ export type ResolvedRoutes = {
   register: string;
   twoFactor: string;
   verifyEmail: string;
+  verifyEmailPage: string;
   forgotPassword: string;
   resetPassword: string;
   error: string;
@@ -269,6 +270,7 @@ const DEFAULT_ROUTES: ResolvedRoutes = {
   register: "/authentication/login",
   twoFactor: "/authentication/2fa",
   verifyEmail: "/authentication/login",
+  verifyEmailPage: "/authentication/verify-email",
   forgotPassword: "/authentication/forgot-password",
   resetPassword: "/authentication/reset-password",
   error: "/authentication/error",

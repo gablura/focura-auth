@@ -91,6 +91,7 @@ export interface AuthNextConfig {
     register?: string;
     twoFactor?: string;
     verifyEmail?: string;
+    verifyEmailPage?: string;
     forgotPassword?: string;
     resetPassword?: string;
     error?: string;
