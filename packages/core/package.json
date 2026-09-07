@@ -66,12 +66,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gablura/focura-auth.git",
+    "url": "https://github.com/gablura/gablura-auth.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/gablura/focura-auth#readme",
+  "homepage": "https://github.com/gablura/gablura-auth#readme",
   "bugs": {
-    "url": "https://github.com/gablura/focura-auth/issues"
+    "url": "https://github.com/gablura/gablura-auth/issues"
   },
   "engines": {
     "node": ">=22"
