@@ -69,7 +69,7 @@
     "url": "https://github.com/gablura/gablura-auth.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/gablura/gablura-auth#readme",
+  "homepage": "https://gablura-org.vercel.app/docs/auth-core",
   "bugs": {
     "url": "https://github.com/gablura/gablura-auth/issues"
   },
